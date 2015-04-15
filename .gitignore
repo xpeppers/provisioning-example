@@ -1,0 +1,5 @@
+.DS_Store
+*.box
+packer_cache
+berks-cookbooks
+Berksfile.lock

@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "chef_json": ""
+  },
+
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "iso_url": "http://releases.ubuntu.com/releases/trusty/ubuntu-14.04.2-server-amd64.iso",
+      "iso_checksum": "83aabd8dcf1e8f469f3c72fff2375195",
+      "iso_checksum_type": "md5",
+      "ssh_username": "ubuntu",
+      "ssh_password": "ubuntu",
+      "ssh_wait_timeout": "15m",
+      "headless": false,
+      "http_directory" : "./",
+      "http_port_min" : 9999,
+      "http_port_max" : 9999,
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz ",
+        "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{.Name}} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "shutdown_command": "echo ubuntu | sudo -S shutdown -P now"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "chef-solo",
+      "cookbook_paths": ["berks-cookbooks"],
+      "run_list": ["example::default"],
+      "json": { "java": { "jdk_version": 7 } }
+    }
+  ],
+
+  "post-processors": [
+    "vagrant"
+  ]
+}

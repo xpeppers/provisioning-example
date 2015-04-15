@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+  UseCanonicalName On
+
+  ProxyPreserveHost On
+  ProxyRequests Off
+  ProxyPass / http://localhost:8080/
+  ProxyPassReverse / http://localhost:8080/
+
+  <Location />
+    Order Deny,Allow
+    Allow from all
+  </Location>
+</VirtualHost>
