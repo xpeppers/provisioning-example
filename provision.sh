@@ -4,4 +4,5 @@ set -e
 
 rm -rf berks-cookbooks
 berks vendor
-packer build -machine-readable packer.json
+
+packer build -var-file=config.json packer.json

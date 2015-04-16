@@ -3,3 +3,4 @@
 packer_cache
 berks-cookbooks
 Berksfile.lock
+output-*

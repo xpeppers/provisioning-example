@@ -1,6 +1,7 @@
 {
   "variables": {
-    "chef_json": ""
+    "jdk_version": "",
+    "tomcat_version": ""
   },
 
   "builders": [
@@ -36,11 +37,20 @@
       "type": "chef-solo",
       "cookbook_paths": ["berks-cookbooks"],
       "run_list": ["example::default"],
-      "json": { "java": { "jdk_version": 7 } }
+      "json": {
+        "java": {
+          "jdk_version": "{{user `jdk_version`}}"
+        },
+        "tomcat": {
+          "base_version": "{{user `tomcat_version`}}"
+        }
+      }
     }
   ],
 
   "post-processors": [
-    "vagrant"
+    { "type": "vagrant",
+      "output": "provisioning-example.box"
+    }
   ]
 }
