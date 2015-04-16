@@ -46,5 +46,22 @@
         }
       }
     }
+  ],
+
+  "post-processors": [
+    {
+      "type": "vsphere",
+      "cluster": "example-cluster",
+      "datacenter": "example-datacenter",
+      "datastore": "example-datastore",
+      "host": "example-host",
+      "username": "vsphere",
+      "password": "vsphere",
+      "vm_folder": "/var/lib/vms",
+      "resource_pool": "example-resource-pool",
+      "vm_network": "example-network",
+      "vm_name": "example-vm",
+      "insecure": "true"
+    }
   ]
 }
