@@ -46,11 +46,5 @@
         }
       }
     }
-  ],
-
-  "post-processors": [
-    { "type": "vagrant",
-      "output": "provisioning-example.box"
-    }
   ]
 }
